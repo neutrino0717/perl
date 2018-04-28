@@ -1,0 +1,4 @@
+perl -e 'print "hi\n"'
+perl -e "$(cat<<'EOF'
+EOF
+)"
