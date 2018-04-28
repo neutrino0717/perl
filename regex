@@ -1,0 +1,36 @@
+#match
+perl -e '$num = "123"; if($num =~  /^\d+$/){print "its a num";}'
+perl -e '$num = "123"; if($num =~ m/^\d+$/){print "its a num";}' #its a num
+
+#substitute
+#tr/// is for transliteration:
+perl -e ' $s1="is hooOt"; $s1 =~ s/o+/o/;  print "$s1"; ' #Perl is hoOt
+perl -e ' $s1="is hooOt"; $s1 =~ s/o+/o/i; print "$s1"; ' #Perl is hot
+perl -e ' $s1="is hooOt"; $s1 =~ s/o/1/;   print "$s1"; ' #Perl is h1oOt
+perl -e ' $s1="is hooOt"; $s1 =~ s/o/1/g;  print "$s1"; ' #Perl is h11Ot
+perl -e ' $s1="is hooOt"; $s1 =~ tr/oO/12/;print "$s1"; ' #Perl is h112t
+
+#myview: maybe similar to r'' in python
+#\Q + \E --> Content between \Q and \E are escaped, Quote Escape
+#            Automatically escapes regex metacharacters, Won't escape dollar signs
+$num = '3.1415'; print "ok\n" if $num =~ /\Q3.14\E/;  #ok
+$num = '3X1415'; print "ok\n" if $num =~ /\Q3.14\E/;
+$num = '3X1415'; print "ok\n" if $num =~ /3.14/;      #ok
+'aabac^a+' =~ /(^a+)/;    print "$1\n";            #aa
+'aabac^a+' =~ /(\Q^a+\E)/;print "$1\n";            #^a+
+
+#/e flag --> Execute code in s///
+$str = '@$123AbCdE*AbCdE'; $str =~ s/(\w)/lc $1/eg; print $str; #@$123abcde*abcde
+
+#the binding operator 
+#=~ tells Perl to match the pattern on the right against the string on the left 
+#=~ has fairly high precedence
+#!~ is the opposite of =~
+print "Do you like Perl? ";
+$likes_perl = (<STDIN> =~  /\byes\b/i); print $likes_perl  
+$likes_perl =  <STDIN> =~  /\byes\b/i;  print $likes_perl 
+$likes_perl =  <STDIN> =~ m/\byes\b/i;  print $likes_perl 
+
+#?=  no capture 
+$data_name="@@@@@@";if($data_name =~ /(^[^a-zA-Z0-9-_].*$)/)  {say "matched ",$1;} #matched @@@@@@
+$data_name="@@@@@@";if($data_name =~ /(?=^[^a-zA-Z0-9-_].*$)/){say "matched ",$1;} #matched
