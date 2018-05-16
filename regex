@@ -9,7 +9,7 @@ perl -e ' $s1="is hooOt"; $s1 =~ s/o+/o/i; print "$s1"; ' #Perl is hot
 perl -e ' $s1="is hooOt"; $s1 =~ s/o/1/;   print "$s1"; ' #Perl is h1oOt
 perl -e ' $s1="is hooOt"; $s1 =~ s/o/1/g;  print "$s1"; ' #Perl is h11Ot
 perl -e ' $s1="is hooOt"; $s1 =~ tr/oO/12/;print "$s1"; ' #Perl is h112t
-
+perl -e ' $s1="is hooOt"; $s2 = $s1 =~ s/o/1/rg;  print "$s1, $s2" '  #is hooOt, is h11Ot
 #myview: maybe similar to r'' in python
 #\Q + \E --> Content between \Q and \E are escaped, Quote Escape
 #            Automatically escapes regex metacharacters, Won't escape dollar signs
